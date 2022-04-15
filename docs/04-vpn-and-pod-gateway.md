@@ -53,8 +53,19 @@ Running the following script will take your PIA details from the prior step, gen
   WG_HOSTNAME=<your PIA Wireguard server hostname> \
   WG_SERVER_IP=<your PIA Wireguard server IP address> \
   PIA_TOKEN=<your PIA_TOKEN> \
-  sudo ./scripts/bootstrap-pod-gateway.sh
+  sudo ./scripts/create-pod-gateway-secret.sh
 ```
+
+## Find your Cluster and Service CIDRs
+
+Next up is finding out what your Cluster and Service CIDRs are. These are IP Address ranges/blocks that are used for IP assignments for Services and Pods inside of your K8s Cluster.
+
+```
+kubectl cluster-info dump | grep -m 1 cluster-cidr
+kubectl cluster-info dump | grep -m 1 service-cluster-ip-range
+```
+
+Take note of the output from both of these commands, as you'll need them for the next step. They should be in CIDR format which looks like `10.244.0.0/16`, `172.16.0.0/16`, etc.
 
 ## Deploy the actual Pod Gateway
 
@@ -62,10 +73,14 @@ Now that we have all of our PIA Wireguard prep out of the way, it's time to depl
 
 We do this simply with Helm:
 
-`helm install pod-gateway k8s-at-home/pod-gateway -n pod-gateway -f pod-gateway/values.yaml`
+```shell
+helm install pod-gateway k8s-at-home/pod-gateway -n pod-gateway -f pod-gateway/values.yaml \
+  --set settings.NOT_ROUTED_TO_GATEWAY_CIDRS="<your Cluster and Service CIDRs, separated by a space>" \
+  --set settings.VPN_LOCAL_CIDRS="<your Local Network CIDRs, separated by a space>"
+```
 
 ## Troubleshooting
 
 ### Webhook doesn't seem to be triggering
 
-Make sure you've created your 'vpn' namespace with the `routed-gateway: "true"` label. It's easy to quickly crate the namespace using `kubectl create ns` and completely forget about the label in the process. Without that label, the webhook will never pickup any triggers.
+Make sure you've created your `vpn` namespace with the `routed-gateway: "true"` label. It's easy to quickly crate the namespace using `kubectl create ns` and completely forget about the label in the process. Without that label, the webhook will never pickup any triggers.

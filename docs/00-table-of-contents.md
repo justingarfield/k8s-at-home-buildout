@@ -11,10 +11,10 @@
 | [Chapter 06](06-jackett.md)                        | Configuring and provisioning Jackett                                           |
 | [Chapter 07](07-qbittorrent.md)                    | Configuring and provisioning QBittorrent                                       |
 | [Chapter 08](08-flaresolverr.md)                   | (optional) Configuring and provisioning Flaresolverr                           |
-| [Chapter 09](.md) | (optional) Configuring and provisioning Sonarr (Television)                    |
-| [Chapter 10](.md) | (optional) Configuring and provisioning Radarr (Movies)                        |
-| [Chapter 11](.md) | (optional) Configuring and provisioning Readarr (Books)                        |
-| [Chapter 12](.md) | (optional) Configuring and provisioning Lidarr (Music)                         |
-| [Chapter 13](.md) | (optional) Configuring and provisioning Overseer                               |
-| [Chapter 14](.md) | (optional) Configuring and provisioning Organizr                               |
+| [Chapter 09](09-sonarr.md)                         | (optional) Configuring and provisioning Sonarr (Television)                    |
+| [Chapter 10](10-radarr.md)                         | (optional) Configuring and provisioning Radarr (Movies)                        |
+| [Chapter 11](11-readarr.md)                        | (optional) Configuring and provisioning Readarr (Books)                        |
+| [Chapter 12](12-lidarr.md)                         | (optional) Configuring and provisioning Lidarr (Music)                         |
+| [Chapter 13](13-overseer.md)                       | (optional) Configuring and provisioning Overseer                               |
+| [Chapter 14](14-organizr.md)                       | (optional) Configuring and provisioning Organizr                               |
 | [Chapter 99](99-worksheet.md)                      | Worksheet                                                                      |
