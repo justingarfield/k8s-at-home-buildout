@@ -5,7 +5,7 @@ addons:
   vpn:
     enabled: true
     type: wireguard
-    configFileSecret: pod-gateway
+    configFileSecret: wireguard-config
     
 settings:
   NOT_ROUTED_TO_GATEWAY_CIDRS: "10.244.0.0/16 10.96.0.0/12"

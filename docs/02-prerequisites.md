@@ -10,7 +10,7 @@ Before going any further, please make sure you've updated and applied patches fo
 
 * Operating System
   * Windows 10 users - Windows Update
-  * Ubuntu/Debian users - `sudo apt-get update && sudo apt-get upgrade`
+  * Ubuntu/Debian users - `sudo apt-get -y update && sudo apt-get -y upgrade`
 * BIOS / UEFI Firmware
 * Hardware Drivers (audio, networking, disk, CPU microcode updates etc.)
 

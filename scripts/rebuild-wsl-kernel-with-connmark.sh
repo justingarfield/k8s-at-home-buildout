@@ -10,7 +10,7 @@
 #  * Copy the running Kernel Config into the WSL Kernel build directory and enable the required feature flags
 #  * Build/compile a new version of the running WSL Kernel that includes support for Wireguard features
 #  * Place a copy of the newly built WSL Kernel on the Host OS, located at C:\temp\wsl-kernel-build\kernel
-#  * Provide instructions at the very end, informing the user how to proceed with their newly build WSL Kernel
+#  * Provide instructions at the very end, informing the user how to proceed with their newly built WSL Kernel
 #
 # See: https://www.reddit.com/r/bashonubuntuonwindows/comments/jk4x24/is_there_a_way_to_run_wireguard_within_wsl2/
 #      https://itgaertner.net/posts/wireguard-in-wsl/

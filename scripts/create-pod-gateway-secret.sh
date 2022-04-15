@@ -81,4 +81,4 @@ AllowedIPs = 0.0.0.0/0
 Endpoint = ${WG_SERVER_IP}:$(echo "$wireguard_json" | jq -r '.server_port')
 ")
 
-kubectl -n pod-gateway create secret generic pod-gateway --from-literal=vpnConfigfile="$wgConfig"
+kubectl -n pod-gateway create secret generic wireguard-config --from-literal=vpnConfigfile="$wgConfig"
