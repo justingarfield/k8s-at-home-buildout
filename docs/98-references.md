@@ -7,3 +7,4 @@
 * https://medium.com/ibm-cloud/diving-into-kubernetes-mutatingadmissionwebhook-6ef3c5695f74
 * [How to include bash scripts with relative path? [duplicate]](https://stackoverflow.com/questions/48167083/how-to-include-bash-scripts-with-relative-path)
 * [Bash Source Command](https://linuxize.com/post/bash-source-command/)
+* [How to catch timeout/errors in a CURL shell script?](https://stackoverflow.com/questions/18258804/how-to-catch-timeout-errors-in-a-curl-shell-script)

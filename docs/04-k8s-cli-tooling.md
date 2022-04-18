@@ -15,11 +15,13 @@ sudo ./scripts/bootstrap-k8s-cli-tooling.sh
 For those wanting to understand everything step-by-step, or are having problems with the bash script, here's the low-down on what's happenin'...
 
 # Setup repository for Helm and install it
-curl https://baltocdn.com/helm/signing.asc | apt-key add - \
-&& echo "deb https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list \
-&& apt-get -qq update \
-&& apt-get install -y \
-  helm
+
+```shell
+curl https://baltocdn.com/helm/signing.asc | apt-key add -
+echo "deb https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list \
+apt-get update
+apt-get install helm
+```
 
 ## Prepare Helm for the K8s at Home Charts
 

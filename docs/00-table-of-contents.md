@@ -19,5 +19,5 @@
 | [Chapter 14](14-lidarr.md)                         | (optional) Configuring and provisioning Lidarr (Music)                         |
 | [Chapter 15](15-overseer.md)                       | (optional) Configuring and provisioning Overseer                               |
 | [Chapter 16](16-organizr.md)                       | (optional) Configuring and provisioning Organizr                               |
-| [Chapter 98](99-references.md)                     | Reference materials used to piece this all together over time                  |
+| [Chapter 98](98-references.md)                     | Reference materials used to piece this all together over time                  |
 | [Chapter 99](99-worksheet.md)                      | Worksheet                                                                      |
