@@ -21,7 +21,9 @@ Before going any further, please make sure you've updated and applied patches fo
 In order for everything in this stack to properly function, you must ensure that the following traffic is allowed on your network: 
 
 * Outbound Traffic
+  * `443/TCP` - for HTTPS traffic
   * `1337/TCP` - for WireGuard VPN connectivity
+  * `1337/UDP` - for WireGuard VPN connectivity
 
 ---
 

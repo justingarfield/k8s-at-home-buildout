@@ -6,7 +6,21 @@ addons:
     enabled: true
     type: wireguard
     configFileSecret: wireguard-config
-    
+    networkPolicy:
+      enabled: true
+      egress:
+        - to:
+          - ipBlock:
+              cidr: 0.0.0.0/0
+          ports:
+          - port: 1337
+            protocol: TCP
+          - port: 1337
+            protocol: UDP
+        - to:
+            # Allow traffic within K8S - change if your K8S cluster uses a different CIDR
+          - ipBlock:
+              cidr: 10.244.0.0/16
 settings:
   VPN_INTERFACE: wg0
   VPN_BLOCK_OTHER_TRAFFIC: true

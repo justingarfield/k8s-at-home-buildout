@@ -37,7 +37,7 @@ Checking login credentials...OK!
 PIA_TOKEN=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+1234567890=
 ```
 
-Take note of the _Wireguard_ entry's `IP Address` and `Server Hostname`, as well as the `PIA_TOKEN` outputs. 
+Take note of the _Wireguard_ entry's `IP Address` and `Server Hostname`, as well as the `PIA_TOKEN` output. 
 
 In the case of the above sample output, those would be `149.57.16.54`, `baltimore402`, and `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+1234567890=` respectively.
 
@@ -80,6 +80,10 @@ helm install pod-gateway k8s-at-home/pod-gateway -n pod-gateway -f pod-gateway/v
 ```
 
 ## Troubleshooting
+
+### Calls to get Wireguard details are failing or Wireguard won't connect
+
+Make sure you opened up Outbound `443/TCP`, `1337/TCP`, and `1337/UDP`
 
 ### Webhook doesn't seem to be triggering
 

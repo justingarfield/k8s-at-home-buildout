@@ -70,10 +70,12 @@ fi
 dnsServer=$(echo "$wireguard_json" | jq -r '.dns_servers[0]')
 dnsSettingForVPN="DNS = $dnsServer"
 
-wgConfig=$(echo "[Interface]
+wgConfig=$(echo "
+[Interface]
 Address = $(echo "$wireguard_json" | jq -r '.peer_ip')
 PrivateKey = $privKey
 $dnsSettingForVPN
+
 [Peer]
 PersistentKeepalive = 25
 PublicKey = $(echo "$wireguard_json" | jq -r '.server_key')
