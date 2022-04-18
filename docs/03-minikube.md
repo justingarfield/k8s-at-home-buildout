@@ -47,32 +47,33 @@ minikube start \
   --addons dashboard
 ```
 
-If everything succeeded, you should now have a local minikube single-node cluster running.
-
-# Setup repository for Helm and install it
-curl https://baltocdn.com/helm/signing.asc | apt-key add - \
-&& echo "deb https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list \
-&& apt-get -qq update \
-&& apt-get install -y \
-  helm
-
-## Install cert-manager
-
-Multiple pods require that cert-manager be deployed inside the kubernetes cluster, as it will be needed to handle SSL/TLS certificates.
+You'll probably need to wait ~5 minutes for this to complete. If everything succeeds, you should now have a local minikube single-node cluster running. The output should look something like this:
 
 ```shell
-helm repo add jetstack https://charts.jetstack.io
-helm repo update
-helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.8.0 --set installCRDs=true
-```
-
-Note: `--set installCRDs=true` is a VERY important part of the command above. Failure to include that switch will lead to a broken cert-manager deployment.
-
-## Prepare Helm for the K8s at Home Charts
-
-Most of this stack will be built using Helm Charts (and a few container images) provided by the K8s at Home project. To allow deployment of their charts, we need to add their chart repository to our Helm install.
-
-```shell
-helm repo add k8s-at-home https://k8s-at-home.com/charts/
-helm repo update
+somedude@DESKTOP-K8E1N21:~$ minikube start \
+>   --kubernetes-version=v1.23.3 \
+>   --cni calico \
+>   --addons ingress \
+>   --addons dashboard
+😄  minikube v1.25.2 on Ubuntu 20.04
+✨  Using the docker driver based on user configuration
+👍  Starting control plane node minikube in cluster minikube
+🚜  Pulling base image ...
+🔥  Creating docker container (CPUs=2, Memory=3100MB) ...
+🐳  Preparing Kubernetes v1.23.3 on Docker 20.10.12 ...
+    ▪ kubelet.housekeeping-interval=5m
+    ▪ Generating certificates and keys ...
+    ▪ Booting up control plane ...
+    ▪ Configuring RBAC rules ...
+🔗  Configuring Calico (Container Networking Interface) ...
+🔎  Verifying Kubernetes components...
+    ▪ Using image kubernetesui/dashboard:v2.3.1
+    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+    ▪ Using image k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.1.1
+    ▪ Using image k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.1.1
+    ▪ Using image kubernetesui/metrics-scraper:v1.0.7
+    ▪ Using image k8s.gcr.io/ingress-nginx/controller:v1.1.1
+🔎  Verifying ingress addon...
+🌟  Enabled addons: storage-provisioner, default-storageclass, dashboard, ingress
+🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
 ```

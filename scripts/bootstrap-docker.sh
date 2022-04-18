@@ -2,6 +2,7 @@
 
 source "$(dirname "$0")/_bash-colors.sh"
 source "$(dirname "$0")/_root-only.sh"
+source "$(dirname "$0")/_stack-versions.sh"
 
 # Setup repository for Docker-related stuffs
 apt-get -qq update \
@@ -18,7 +19,7 @@ apt-get install -y \
 # Download, install, and start Docker, Docker CLI, and Containerd
 apt-get -qq update \
 && apt-get install -y \
-  docker-ce=5:20.10.14~3-0~ubuntu-focal \
-  docker-ce-cli=5:20.10.14~3-0~ubuntu-focal \
-  containerd.io=1.5.11-1 \
+  docker-ce=$DOCKERCE_VERSION \
+  docker-ce-cli=$DOCKERCECLI_VERSION \
+  containerd.io=$CONTAINERDIO_VERSION \
 && service docker start
