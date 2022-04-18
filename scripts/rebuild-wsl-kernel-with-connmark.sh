@@ -17,25 +17,8 @@
 #
 ###
 
-# Check if terminal allows output, if yes, define colors for output
-if [[ -t 1 ]]; then
-  ncolors=$(tput colors)
-  if [[ -n $ncolors && $ncolors -ge 8 ]]; then
-    red=$(tput setaf 1) # ANSI red
-    green=$(tput setaf 2) # ANSI green
-    nc=$(tput sgr0) # No Color
-  else
-    red=''
-    green=''
-    nc='' # No Color
-  fi
-fi
-
-# Only allow script to run as root
-if (( EUID != 0 )); then
-  echo -e "${red}This script needs to be run as root. Try again with 'sudo $0'${nc}"
-  exit 1
-fi
+source "$(dirname "$0")/_bash-colors.sh"
+source "$(dirname "$0")/_root-only.sh"
 
 kernelNeedsRecompile=false
 

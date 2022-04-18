@@ -4,6 +4,10 @@ This is a very crucial set of steps to get correct, so that we can ensure traffi
 
 This tutorial defaults to using Wireguard with Private Internet Access.
 
+## Overview of the pieces to this puzzle
+
+
+
 ## Create K8s Namespaces
 
 Pod Gateway related resources will require two namespaces to function properly in this stack.
@@ -88,3 +92,13 @@ Make sure you opened up Outbound `443/TCP`, `1337/TCP`, and `1337/UDP`
 ### Webhook doesn't seem to be triggering
 
 Make sure you've created your `vpn` namespace with the `routed-gateway: "true"` label. It's easy to quickly crate the namespace using `kubectl create ns` and completely forget about the label in the process. Without that label, the webhook will never pickup any triggers.
+
+## References
+
+* [gateway-admision-controller container image](https://github.com/k8s-at-home/gateway-admision-controller)
+* [wireguard container image](https://github.com/k8s-at-home/container-images/tree/main/apps/wireguard)
+* [pod-gateway container image](https://github.com/k8s-at-home/pod-gateway)
+* [pod-gateway chart](https://github.com/k8s-at-home/charts/blob/master/charts/stable/pod-gateway)
+* [wireguard chart](https://github.com/k8s-at-home/charts/tree/master/charts/stable/wireguard)
+* []()
+* []()

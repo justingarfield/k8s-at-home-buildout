@@ -4,34 +4,13 @@
 # This script derived from https://github.com/pia-foss/manual-connections/blob/master/connect_to_wireguard_with_token.sh
 ###
 
-# This function allows you to check if the required tools have been installed.
-check_tool() {
-  cmd=$1
-  if ! command -v "$cmd" >/dev/null; then
-    echo "$cmd could not be found"
-    echo "Please install $cmd"
-    exit 1
-  fi
-}
+source "$(dirname "$0")/_bash-colors.sh"
+source "$(dirname "$0")/_root-only.sh"
 
 # Now we call the function to make sure we can use curl, jq and kubectl.
 check_tool curl
 check_tool jq
 check_tool kubectl
-
-# Check if terminal allows output, if yes, define colors for output
-if [[ -t 1 ]]; then
-  ncolors=$(tput colors)
-  if [[ -n $ncolors && $ncolors -ge 8 ]]; then
-    red=$(tput setaf 1) # ANSI red
-    green=$(tput setaf 2) # ANSI green
-    nc=$(tput sgr0) # No Color
-  else
-    red=''
-    green=''
-    nc='' # No Color
-  fi
-fi
 
 # Check if the mandatory environment variables are set.
 if [[ -z $WG_SERVER_IP ||

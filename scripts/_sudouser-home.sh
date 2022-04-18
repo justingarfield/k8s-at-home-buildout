@@ -1,0 +1,3 @@
+SUDOUSER_HOME=~$SUDO_USER/k8s-buildout
+
+mkdir -p ~$SUDOUSER_HOME

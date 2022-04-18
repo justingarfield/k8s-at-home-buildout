@@ -66,7 +66,7 @@ wsl --set-default Ubuntu-20.04
 
 ### Install/Update Linux Distribution
 
-The steps above updated the WSL Kernel, but doesn't actually affect anything inside of the Linux distributions that it launches. In order to update the actual Ubuntu 20.04 Linux distribution, open up the Ubuntu 20.04 distribution via one of the shortcuts, or by typing in an elevated prompt:
+The steps above updated the WSL Kernel, but doesn't actually affect anything inside of the Linux distributions that sit on-top-of the Kernel. In order to update the actual Ubuntu 20.04 Linux distribution, open up the Ubuntu 20.04 distribution via one of the shortcuts, or by typing in an elevated prompt:
 ```shell
 wsl --distribution Ubuntu20.04
 ```
