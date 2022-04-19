@@ -49,7 +49,7 @@ We'll use those to get the required values for a WireGuard configuration file th
 
 ## Generate Wireguard Configuration as Secret
 
-The K8s at Home Wireguard container can be given the name of a Secret (located in the same Namespace), which is used to read-in a pre-built `wg0.conf` configuration file for Wireguard. It expects this configuration file to exist under a Key of `vpnConfigfile`. 
+The Wireguard container can be given the name of a Secret (located in the same Namespace), which is used to read-in a pre-built `wg0.conf` configuration file for Wireguard. It expects this configuration file to exist under a Key of `vpnConfigfile`. 
 
 Running the following script will take your PIA details from the prior step, generate a public/private key-pair, call a PIA HTTPS endpoint to get the required access credentials for VPN connectivity, generate a `wg0.conf` file for Wireguard on-the-fly, and store that `wg0.conf` file as the value of a Kubernetes Secret.
 
@@ -100,5 +100,3 @@ Make sure you've created your `vpn` namespace with the `routed-gateway: "true"` 
 * [pod-gateway container image](https://github.com/k8s-at-home/pod-gateway)
 * [pod-gateway chart](https://github.com/k8s-at-home/charts/blob/master/charts/stable/pod-gateway)
 * [wireguard chart](https://github.com/k8s-at-home/charts/tree/master/charts/stable/wireguard)
-* []()
-* []()

@@ -1,5 +1,13 @@
 # Overview
 
+## Tested and Supported Configurations
+
+* Ubuntu 20.04
+* Windows 10 Home/Professional/Enterprise + WSL + Ubuntu 20.04
+* Windows 10 Home/Professional/Enterprise + WSL + Docker Desktop + Ubuntu 20.04
+* Windows 10 Professional/Enterprise + Hyper-V + Ubuntu 20.04
+
+_Note: Will most likely work on other Debian-based distributions with minimal effort._
 
 ## Software and Tools
 
