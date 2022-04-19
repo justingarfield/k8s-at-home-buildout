@@ -59,11 +59,11 @@ apt-get install -y \
   libelf-dev \
   build-essential \
   pkg-config \
-  git \
   bison \
   flex \
   libssl-dev \
-  bc
+  bc \
+  dwarves
 
 gitHubBranch=linux-msft-wsl-$(uname -r | sed -nre 's/^[^0-9]*(([0-9]+\.)*[0-9]+).*/\1/p')
 echo ""
@@ -72,7 +72,7 @@ echo "Derived a GitHub branch name of '${gitHubBranch}' to clone currently runni
 echo "====="
 echo ""
 
-if [ -d "~$SUDO_USER/WSL2-Linux-Kernel" ]; then
+if [ -d "/home/$SUDO_USER/WSL2-Linux-Kernel" ]; then
   echo "WSL2-Linux-Kernel folder already exists, skipping 'git clone'"
 else
   echo "Cloning the $gitHubBranch branch of the WSL2-Linux-Kernel GitHub repository"
@@ -84,23 +84,23 @@ echo "====="
 echo "Making a copy of the running Kernel configuration"
 echo "====="
 echo ""
-zcat /proc/config.gz > ~$SUDO_USER/WSL2-Linux-Kernel/.config
+zcat /proc/config.gz > /home/$SUDO_USER/WSL2-Linux-Kernel/.config
 
 echo ""
 echo "====="
 echo "Updating Kernel configuration copy with CONFIG_NETFILTER_XT_CONNMARK and CONFIG_NETFILTER_XT_MATCH_CONNMARK feature flags set"
 echo "====="
 echo ""
-sed -i '/# CONFIG_NETFILTER_XT_CONNMARK is not set/c\CONFIG_NETFILTER_XT_CONNMARK=y' ~$SUDO_USER/WSL2-Linux-Kernel/.config
-sed -i '/# CONFIG_NETFILTER_XT_MATCH_CONNMARK is not set/c\CONFIG_NETFILTER_XT_MATCH_CONNMARK=y' ~$SUDO_USER/WSL2-Linux-Kernel/.config
+sed -i '/# CONFIG_NETFILTER_XT_CONNMARK is not set/c\CONFIG_NETFILTER_XT_CONNMARK=y' /home/$SUDO_USER/WSL2-Linux-Kernel/.config
+sed -i '/# CONFIG_NETFILTER_XT_MATCH_CONNMARK is not set/c\CONFIG_NETFILTER_XT_MATCH_CONNMARK=y' /home/$SUDO_USER/WSL2-Linux-Kernel/.config
 
 echo ""
 echo "====="
 echo "Compiling WSL Kernel"
 echo "====="
 echo ""
-make -j $(nproc) -C ~$SUDO_USER/WSL2-Linux-Kernel
-make -j $(nproc) -C ~$SUDO_USER/WSL2-Linux-Kernel modules_install
+make -j $(nproc) -C /home/$SUDO_USER/WSL2-Linux-Kernel
+make -j $(nproc) -C /home/$SUDO_USER/WSL2-Linux-Kernel modules_install
 
 echo ""
 echo "====="
@@ -108,7 +108,7 @@ echo "Copying newly compiled Kernel over to Windows filesystem"
 echo "====="
 echo ""
 mkdir -p /mnt/c/temp/wsl-kernel-build
-cp ~$SUDO_USER/WSL2-Linux-Kernel/arch/x86/boot/bzImage /mnt/c/temp/wsl-kernel-build/kernel
+cp /home/$SUDO_USER/WSL2-Linux-Kernel/arch/x86/boot/bzImage /mnt/c/temp/wsl-kernel-build/kernel
 
 echo ""
 echo "====="
