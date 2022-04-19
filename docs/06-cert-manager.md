@@ -14,7 +14,7 @@ sudo ./scripts/bootstrap-cert-manager.sh
 
 For those wanting to understand everything step-by-step, or are having problems with the bash script, here's the low-down on what's happenin'...
 
-## Install cert-manager
+### Install cert-manager
 
 Multiple pods require that cert-manager be deployed inside the kubernetes cluster, as it will be needed to handle SSL/TLS certificates.
 

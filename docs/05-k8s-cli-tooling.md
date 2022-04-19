@@ -14,7 +14,7 @@ sudo ./scripts/bootstrap-k8s-cli-tooling.sh
 
 For those wanting to understand everything step-by-step, or are having problems with the bash script, here's the low-down on what's happenin'...
 
-# Setup repository for Helm and install it
+### Setup repository for Helm and install it
 
 ```shell
 curl https://baltocdn.com/helm/signing.asc | apt-key add -
@@ -23,7 +23,7 @@ apt-get update
 apt-get install helm
 ```
 
-## Prepare Helm for the K8s at Home Charts
+### Prepare Helm for the K8s at Home Charts
 
 Most of this stack will be built using Helm Charts (and a few container images) provided by the K8s at Home project. To allow deployment of their charts, we need to add their chart repository to our Helm install.
 
