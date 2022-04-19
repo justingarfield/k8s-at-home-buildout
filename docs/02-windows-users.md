@@ -230,6 +230,24 @@ chmod 700 ~/k8s-at-home-buildout/scripts/*
 Example output:
 
 ```bash
+somedude@DESKTOP-FPUE1RT:~$ sudo apt-get install -y git
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+git is already the newest version (1:2.25.1-1ubuntu3.3).
+0 upgraded, 0 newly installed, 0 to remove and 11 not upgraded.
+somedude@DESKTOP-FPUE1RT:~$ cd ~ && pwd
+/home/somedude
+somedude@DESKTOP-FPUE1RT:~$ git clone https://github.com/justingarfield/k8s-at-home-buildout.git
+Cloning into 'k8s-at-home-buildout'...
+remote: Enumerating objects: 140, done.
+remote: Counting objects: 100% (140/140), done.
+remote: Compressing objects: 100% (90/90), done.
+remote: Total 140 (delta 73), reused 114 (delta 47), pack-reused 0
+Receiving objects: 100% (140/140), 38.87 KiB | 1.62 MiB/s, done.
+Resolving deltas: 100% (73/73), done.
+somedude@DESKTOP-FPUE1RT:~$ chmod 700 ~/k8s-at-home-buildout/scripts/*
+somedude@DESKTOP-FPUE1RT:~$
 ```
 
 ### <a id="kernelRecompileScript"></a>Recompile WSL Kernel if needed
@@ -245,6 +263,84 @@ Review the output of the script...If it determined that a recompile was required
 Example output:
 
 ```bash
+somedude@DESKTOP-FPUE1RT:~$ sudo ~/k8s-at-home-buildout/scripts/rebuild-wsl-kernel-with-connmark.sh
+
+Currently running WSL Kernel does not have CONFIG_NETFILTER_XT_CONNMARK support
+
+Currently running WSL Kernel does not have CONFIG_NETFILTER_XT_MATCH_CONNMARK support
+
+WSL Kernel needs to be recompiled with required feature flags
+
+Press any key to continue
+
+...
+
+
+=====
+Installing tools required to recompile the WSL Kernel.
+=====
+
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+
+...
+
+=====
+Derived a GitHub branch name of 'linux-msft-wsl-5.10.102.1' to clone currently running Kernel source
+=====
+
+Cloning the linux-msft-wsl-5.10.102.1 branch of the WSL2-Linux-Kernel GitHub repository
+Note: switching to 'd489414c23af0cf54edd196b5400bb831fc35b02'.
+
+...
+
+=====
+Making a copy of the running Kernel configuration
+=====
+
+
+=====
+Updating Kernel configuration copy with CONFIG_NETFILTER_XT_CONNMARK and CONFIG_NETFILTER_XT_MATCH_CONNMARK feature flags set
+=====
+
+
+=====
+Compiling WSL Kernel
+=====
+
+make: Entering directory '/home/somedude/WSL2-Linux-Kernel'
+  SYNC    include/config/auto.conf.cmd
+
+
+...
+
+  OBJCOPY arch/x86/boot/setup.bin
+  BUILD   arch/x86/boot/bzImage
+Kernel: arch/x86/boot/bzImage is ready  (#1)
+make: Leaving directory '/home/somedude/WSL2-Linux-Kernel'
+make: Entering directory '/home/somedude/WSL2-Linux-Kernel'
+  DEPMOD  5.10.102.1-microsoft-standard-WSL2+
+make: Leaving directory '/home/somedude/WSL2-Linux-Kernel'
+
+=====
+Copying newly compiled Kernel over to Windows filesystem
+=====
+
+
+=====
+
+Done recompiling WSL Linux Kernel with CONFIG_NETFILTER_XT_CONNMARK and CONFIG_NETFILTER_XT_MATCH_CONNMARK features enabled.
+
+You now need to do the following:
+ * Shutdown this running WSL instance by running this in a CMD/PowerShell terminal on the Host: 'wsl --shutdown'
+ * Make a copy of 'C:\Windows\System32\lxss\tools\kernel' to have as a backup
+ * Overwrite 'C:\Windows\System32\lxss\tools\kernel' with 'C:\temp\wsl-kernel-build\kernel'
+ * Restart WSL instance
+
+=====
+
+somedude@DESKTOP-FPUE1RT:~$
 ```
 
 ## <a id="troubleshooting"></a>Troubleshooting
