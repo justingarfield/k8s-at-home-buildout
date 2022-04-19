@@ -31,7 +31,7 @@ The latest version of the WSL installer also downloads and installs Ubuntu by de
 
 Run the following commands in an administrator PowerShell:
 
-```shell
+```powershell
 PS C:\users\somedude> wsl --install --distribution Ubuntu-20.04
 Installing: Virtual Machine Platform
 Virtual Machine Platform has been installed.
@@ -46,7 +46,7 @@ The requested operation is successful. Changes will not be effective until the s
 
 Now reboot Windows (as-per the instructions provided). When you log back in, a window should open up and continue installation. It should look like the following output here:
 
-```shell
+```bash
 Installing, this may take a few minutes...
 Please create a default UNIX user account. The username does not need to match your Windows username.
 For more information visit: https://aka.ms/wslusers
@@ -57,7 +57,7 @@ You will now need to configure a username and password, which can be completely 
 
 _Note: If you instead received an error code of `0x80370102`, see the [Troubleshooting](#wslRegisterDistribution) section below._
 
-```shell
+```bash
 Enter new UNIX username: somedude
 New password:
 Retype new password:
@@ -100,13 +100,13 @@ If you already have WSL installed, you just need to make sure you have Ubuntu 20
 
 In an administrator PowerShell, type the following:
 
-```shell
+```powershell
 PS C:\Users\somedude> wsl --install --distribution Ubuntu-20.04
 ```
 
 If you already have the distribution, you should get output like this, and a bash prompt should open in another window:
 
-```shell
+```powershell
 PS C:\Users\somedude> wsl --install --distribution Ubuntu-20.04
 Ubuntu 20.04 LTS is already installed.
 Launching Ubuntu 20.04 LTS...
@@ -114,7 +114,7 @@ Launching Ubuntu 20.04 LTS...
 
 Otherwise, it should download the distribution first, you should see output like below, and you will be prompted to setup a new user/password in another window (similar to the final steps under the fresh install instructions above):
 
-```shell
+```powershell
 PS C:\Users\somedude> wsl --install --distribution Ubuntu-20.04
 Downloading: Ubuntu 20.04 LTS
 Installing: Ubuntu 20.04 LTS
@@ -126,12 +126,12 @@ Launching Ubuntu 20.04 LTS...
 
 If you run multiple distributions under WSL, you can make your life easier working with this stack by setting your default distribution to be Ubuntu 20.04. You can do this by typing the following in an elevated PowerShell terminal:
 
-```shell
+```powershell
 PS C:\Users\somedude> wsl --set-default Ubuntu-20.04
 ```
 
 You can see which distribution is set as a default if you look for an entry with `(Default)` next to it after running the following command:
-```shell
+```powershell
 PS C:\Users\somedude> wsl --list
 Windows Subsystem for Linux Distributions:
 Ubuntu-20.04 (Default) <---
@@ -147,7 +147,7 @@ Even if you did a fresh install of WSL above, chances are there are there's stil
 
 In an administrator PowerShell:
 
-```shell
+```powershell
 PS C:\Users\somedude> wsl --update
 Checking for updates...
 Downloading updates...
@@ -157,7 +157,7 @@ Kernel version: 5.10.102.1
 ```
 
 If you did in-fact have WSL Kernel updates, you'll need to do what the instructions say and run the following command as well:
-```shell
+```powershell
 PS C:\Users\somedude> wsl --shutdown
 ```
 
@@ -169,13 +169,13 @@ Open up your Ubuntu 20.04 distro...You can do this by clicking on the Ubuntu 20.
 
 You should now be at a bash prompt and ready to upgrade Ubuntu 20.04 to the latest and greatest. We do that by issuing the following commands:
 
-```shell
+```bash
 sudo apt-get update && sudo apt-get -y upgrade
 ```
 
 Example output of what it should look like:
 
-```shell
+```bash
 somedude@DESKTOP-FPUE1RT:~$ sudo apt-get update && sudo apt-get -y upgrade
 [sudo] password for somedude:
 Get:1 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
@@ -206,17 +206,20 @@ somedude@DESKTOP-FPUE1RT:~$
 
 Once done applying updates, you will most likely need to "restart the system" according to apt-get upgrade. To do that with WSL, you can simply do what we did for the WSL Kernel as well, by running the following command, and re-opening Ubuntu 20.04 afterward.
 
-```shell
+```powershell
 PS C:\Users\somedude> wsl --shutdown
 ```
 
 ## <a id="wireguard"></a>Make sure WSL Kernel supports Wireguard
 
+`<TODO: Workflow order is fudged here...fresh install wouldn't have cloned yet>`
+`<TODO: add example output from script for recompile w/ instruction steps>`
+
 At the time of this writing, the WSL Kernel doesn't have the required feature flags enabled that the Wireguard VPN software requires.
 
 Assuming you cloned this repository to your local Ubuntu 20.04 instance, you can type the following to run a bash script I've provided that will scan your WSL Kernel's currently running config and determine if a WSL Kernel recompile is required:
 
-```shell
+```bash
 sudo bash k8s-at-home-buildout/scripts/rebuild-wsl-kernel-with-connmark.sh
 ```
 
