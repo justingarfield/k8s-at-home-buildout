@@ -22,6 +22,7 @@ source "$(dirname "$0")/_root-only.sh"
 
 kernelNeedsRecompile=false
 
+echo ""
 if [ -z $(zcat /proc/config.gz | grep -i CONFIG_NETFILTER_XT_CONNMARK=y) ]; then
   echo "${red}Currently running WSL Kernel does not have CONFIG_NETFILTER_XT_CONNMARK support${nc}"
   kernelNeedsRecompile=true
@@ -29,6 +30,7 @@ else
   echo "${green}Currently running WSL Kernel has CONFIG_NETFILTER_XT_CONNMARK support${nc}"
 fi
 
+echo ""
 if [ -z $(zcat /proc/config.gz | grep -i CONFIG_NETFILTER_XT_MATCH_CONNMARK=y) ]; then
   echo "${red}Currently running WSL Kernel does not have CONFIG_NETFILTER_XT_MATCH_CONNMARK support${nc}"
   kernelNeedsRecompile=true
@@ -36,6 +38,7 @@ else
   echo "${green}Currently running WSL Kernel has CONFIG_NETFILTER_XT_MATCH_CONNMARK support${nc}"
 fi
 
+echo ""
 if $kernelNeedsRecompile; then
   echo "${red}WSL Kernel needs to be recompiled with required feature flags${nc}"
 else
@@ -43,7 +46,9 @@ else
   exit 0
 fi
 
-read -p "Press Enter to continue" </dev/tty
+echo ""
+read -p "Press any key to continue" </dev/tty
+echo ""
 
 echo ""
 echo "====="
@@ -67,7 +72,7 @@ echo "Derived a GitHub branch name of '${gitHubBranch}' to clone currently runni
 echo "====="
 echo ""
 
-if [ -d "./WSL2-Linux-Kernel" ]; then
+if [ -d "~$SUDO_USER/WSL2-Linux-Kernel" ]; then
   echo "WSL2-Linux-Kernel folder already exists, skipping 'git clone'"
 else
   echo "Cloning the $gitHubBranch branch of the WSL2-Linux-Kernel GitHub repository"
@@ -79,23 +84,23 @@ echo "====="
 echo "Making a copy of the running Kernel configuration"
 echo "====="
 echo ""
-zcat /proc/config.gz > ./WSL2-Linux-Kernel/.config
+zcat /proc/config.gz > ~$SUDO_USER/WSL2-Linux-Kernel/.config
 
 echo ""
 echo "====="
 echo "Updating Kernel configuration copy with CONFIG_NETFILTER_XT_CONNMARK and CONFIG_NETFILTER_XT_MATCH_CONNMARK feature flags set"
 echo "====="
 echo ""
-sed -i '/# CONFIG_NETFILTER_XT_CONNMARK is not set/c\CONFIG_NETFILTER_XT_CONNMARK=y' ./WSL2-Linux-Kernel/.config
-sed -i '/# CONFIG_NETFILTER_XT_MATCH_CONNMARK is not set/c\CONFIG_NETFILTER_XT_MATCH_CONNMARK=y' ./WSL2-Linux-Kernel/.config
+sed -i '/# CONFIG_NETFILTER_XT_CONNMARK is not set/c\CONFIG_NETFILTER_XT_CONNMARK=y' ~$SUDO_USER/WSL2-Linux-Kernel/.config
+sed -i '/# CONFIG_NETFILTER_XT_MATCH_CONNMARK is not set/c\CONFIG_NETFILTER_XT_MATCH_CONNMARK=y' ~$SUDO_USER/WSL2-Linux-Kernel/.config
 
 echo ""
 echo "====="
 echo "Compiling WSL Kernel"
 echo "====="
 echo ""
-make -j $(nproc) -C ./WSL2-Linux-Kernel
-make -j $(nproc) -C ./WSL2-Linux-Kernel modules_install
+make -j $(nproc) -C ~$SUDO_USER/WSL2-Linux-Kernel
+make -j $(nproc) -C ~$SUDO_USER/WSL2-Linux-Kernel modules_install
 
 echo ""
 echo "====="
@@ -103,7 +108,7 @@ echo "Copying newly compiled Kernel over to Windows filesystem"
 echo "====="
 echo ""
 mkdir -p /mnt/c/temp/wsl-kernel-build
-cp ./WSL2-Linux-Kernel/arch/x86/boot/bzImage /mnt/c/temp/wsl-kernel-build/kernel
+cp ~$SUDO_USER/WSL2-Linux-Kernel/arch/x86/boot/bzImage /mnt/c/temp/wsl-kernel-build/kernel
 
 echo ""
 echo "====="
