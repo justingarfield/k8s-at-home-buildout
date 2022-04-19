@@ -1,5 +1,5 @@
 routed_namespaces:
-- vpn
+- jollyroger
 
 addons:
   vpn:

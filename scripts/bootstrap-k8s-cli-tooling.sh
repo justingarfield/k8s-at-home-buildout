@@ -13,8 +13,8 @@ curl https://baltocdn.com/helm/signing.asc | apt-key add - \
   helm
 
 # Download, verify, and install kubectl
-curl -L "https://dl.k8s.io/release/$KUBERNETES_VERSION/bin/linux/amd64/kubectl" -o $SUDOUSER_HOME/kubectl \
-&& curl -L "https://dl.k8s.io/$KUBERNETES_VERSION/bin/linux/amd64/kubectl.sha256" -o $SUDOUSER_HOME/kubectl.sha256
+curl -L "https://dl.k8s.io/release/v$KUBERNETES_VERSION/bin/linux/amd64/kubectl" -o $SUDOUSER_HOME/kubectl \
+&& curl -L "https://dl.k8s.io/v$KUBERNETES_VERSION/bin/linux/amd64/kubectl.sha256" -o $SUDOUSER_HOME/kubectl.sha256
 
 echo "$(cat $SUDOUSER_HOME/kubectl.sha256) kubectl" | sha256sum --check | grep 'kubectl: OK' &> /dev/null
 if [ $? != 0 ]; then
@@ -25,6 +25,6 @@ fi
 install -o root -g root -m 0755 $SUDOUSER_HOME/kubectl /usr/local/bin/kubectl
 
 # Download, extract, and install calicoctl
-curl -L https://github.com/projectcalico/calico/releases/download/$CALICO_VERSION/release-$CALICO_VERSION.tgz -o calico-release-$CALICO_VERSION.tgz
-tar -xvf calico-release-$CALICO_VERSION.tgz --occurrence release-$CALICO_VERSION/bin/calicoctl
-install -o root -g root -m 0755 release-$CALICO_VERSION/bin/calicoctl /usr/local/bin/calicoctl
+curl -L https://github.com/projectcalico/calico/releases/download/v$CALICO_VERSION/release-v$CALICO_VERSION.tgz -o calico-release-v$CALICO_VERSION.tgz
+tar -xvf calico-release-v$CALICO_VERSION.tgz --occurrence release-v$CALICO_VERSION/bin/calicoctl
+install -o root -g root -m 0755 release-v$CALICO_VERSION/bin/calicoctl /usr/local/bin/calicoctl

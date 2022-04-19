@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# TODO: Probably don't even really need this anymore, now that things are split-out better
+
 #####################################################################################
 #
 # This script assumes that you:
