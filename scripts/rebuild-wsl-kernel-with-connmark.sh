@@ -43,8 +43,14 @@ else
   exit 0
 fi
 
+read -p "Press Enter to continue" </dev/tty
+
+echo ""
+echo "====="
 echo "Installing tools required to recompile the WSL Kernel."
-apt-get install -y -q \
+echo "====="
+echo ""
+apt-get install -y \
   libelf-dev \
   build-essential \
   pkg-config \
@@ -55,7 +61,11 @@ apt-get install -y -q \
   bc
 
 gitHubBranch=linux-msft-wsl-$(uname -r | sed -nre 's/^[^0-9]*(([0-9]+\.)*[0-9]+).*/\1/p')
+echo ""
+echo "====="
 echo "Derived a GitHub branch name of '${gitHubBranch}' to clone currently running Kernel source"
+echo "====="
+echo ""
 
 if [ -d "./WSL2-Linux-Kernel" ]; then
   echo "WSL2-Linux-Kernel folder already exists, skipping 'git clone'"
@@ -64,23 +74,39 @@ else
   git clone --branch $gitHubBranch --depth 1 --quiet https://github.com/microsoft/WSL2-Linux-Kernel.git
 fi
 
+echo ""
+echo "====="
 echo "Making a copy of the running Kernel configuration"
+echo "====="
+echo ""
 zcat /proc/config.gz > ./WSL2-Linux-Kernel/.config
 
+echo ""
+echo "====="
 echo "Updating Kernel configuration copy with CONFIG_NETFILTER_XT_CONNMARK and CONFIG_NETFILTER_XT_MATCH_CONNMARK feature flags set"
+echo "====="
+echo ""
 sed -i '/# CONFIG_NETFILTER_XT_CONNMARK is not set/c\CONFIG_NETFILTER_XT_CONNMARK=y' ./WSL2-Linux-Kernel/.config
 sed -i '/# CONFIG_NETFILTER_XT_MATCH_CONNMARK is not set/c\CONFIG_NETFILTER_XT_MATCH_CONNMARK=y' ./WSL2-Linux-Kernel/.config
 
+echo ""
+echo "====="
 echo "Compiling WSL Kernel"
+echo "====="
+echo ""
 make -j $(nproc) -C ./WSL2-Linux-Kernel
 make -j $(nproc) -C ./WSL2-Linux-Kernel modules_install
 
+echo ""
+echo "====="
 echo "Copying newly compiled Kernel over to Windows filesystem"
+echo "====="
+echo ""
 mkdir -p /mnt/c/temp/wsl-kernel-build
 cp ./WSL2-Linux-Kernel/arch/x86/boot/bzImage /mnt/c/temp/wsl-kernel-build/kernel
 
 echo ""
-echo ""
+echo "====="
 echo ""
 echo "Done recompiling WSL Linux Kernel with CONFIG_NETFILTER_XT_CONNMARK and CONFIG_NETFILTER_XT_MATCH_CONNMARK features enabled."
 echo ""
@@ -90,5 +116,5 @@ echo " * Make a copy of 'C:\Windows\System32\lxss\tools\kernel' to have as a bac
 echo " * Overwrite 'C:\Windows\System32\lxss\tools\kernel' with 'C:\temp\wsl-kernel-build\kernel'"
 echo " * Restart WSL instance"
 echo ""
-echo ""
+echo "====="
 echo ""

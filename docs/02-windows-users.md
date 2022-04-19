@@ -1,4 +1,4 @@
-# Windows Users
+# WSL Users
 
 In this chapter:
 
@@ -9,6 +9,8 @@ In this chapter:
 * [Apply WSL Kernel Updates](#kernelUpdates)
 * [Apply Ubuntu 20.04 Updates](#ubuntuUpdates)
 * [Make sure WSL Kernel supports Wireguard](#wireguard)
+  * [Clone this repository from GitHub inside Ubuntu](#cloneRepo)
+  * [Recompile WSL Kernel if needed](#kernelRecompileScript)
 * [Troubleshooting](#troubleshooting)
   * [WslRegisterDistribution failed with error: 0x80370102](#wslRegisterDistribution)
 
@@ -212,20 +214,38 @@ PS C:\Users\somedude> wsl --shutdown
 
 ## <a id="wireguard"></a>Make sure WSL Kernel supports Wireguard
 
-`<TODO: Workflow order is fudged here...fresh install wouldn't have cloned yet>`
 `<TODO: add example output from script for recompile w/ instruction steps>`
 
-At the time of this writing, the WSL Kernel doesn't have the required feature flags enabled that the Wireguard VPN software requires.
+At the time of this writing, the WSL Kernel doesn't have the required feature flags enabled that the Wireguard VPN software requires. Since not everyone is comfortable recompiling Linux Kernels, I've provided a bash script that can determine if a recompile is required, and it-so it will automatically perform all the required activites.
 
-Assuming you cloned this repository to your local Ubuntu 20.04 instance, you can type the following to run a bash script I've provided that will scan your WSL Kernel's currently running config and determine if a WSL Kernel recompile is required:
+### <a id="cloneRepo"></a>Clone this repository from GitHub inside Ubuntu
 
 ```bash
-sudo bash k8s-at-home-buildout/scripts/rebuild-wsl-kernel-with-connmark.sh
+sudo apt-get install -y git
+cd ~ && pwd
+git clone https://github.com/justingarfield/k8s-at-home-buildout.git
+chmod 700 ~/k8s-at-home-buildout/scripts/*
 ```
 
-If the script determined that a recompile was required, it will download the required tooling, clone the source code from GitHub, and perform a build automatically for you. This can take 5-10 minutes depending on your hardware.
+Example output:
 
-If a recompilation did occur, **you will be required to follow some manual steps at the end of this to swap out the kernel binary on the Windows Host itself**. See output from the script when it finishes.
+```bash
+```
+
+### <a id="kernelRecompileScript"></a>Recompile WSL Kernel if needed
+
+You can now type the following to run a bash script I've provided that will scan your WSL Kernel's currently running config and determine if a WSL Kernel recompile is required:
+
+```bash
+sudo ~/k8s-at-home-buildout/scripts/rebuild-wsl-kernel-with-connmark.sh
+```
+
+Review the output of the script...If it determined that a recompile was required, it will download the required tooling, clone the source code from GitHub, and perform a build automatically for you. This can take 5-10 minutes depending on your hardware. If a recompilation did occur, **you will be required to follow some manual steps at the end of this to swap out the kernel binary on the Windows Host itself**. See output from the script when it finishes.
+
+Example output:
+
+```bash
+```
 
 ## <a id="troubleshooting"></a>Troubleshooting
 
