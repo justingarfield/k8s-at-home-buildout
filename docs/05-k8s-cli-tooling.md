@@ -7,7 +7,7 @@ There are some important CLI commands that you'll need throughout your use of Ku
 For those seeking ultimate convenience, simply run the below script:
 
 ```shell
-sudo ./scripts/bootstrap-k8s-cli-tooling.sh
+./scripts/bootstrap-k8s-cli-tooling.sh
 ```
 
 ## Install K8s CLI Tooling Manually

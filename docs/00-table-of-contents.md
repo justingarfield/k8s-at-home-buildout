@@ -7,8 +7,8 @@
 | [Chapter 02 - WSL Users](02-wsl-users.md)                                           | Prepare Windows Subsystem for Linux side of things before getting too far in   |
 | [Chapter 03 - Prerequisites](03-prerequisites.md)                                   | Configuring and installing the prerequisites for this stack                    |
 | [Chapter 04 - Docker CE](04-docker-ce.md)                                           | Configuring, installing, and starting Docker CE                                |
-| [Chapter 05 - Minikube](04-minikube.md)                                             | Configuring, installing, and starting Minikube for your Kubernetes environment |
-| [Chapter 06 - Kubernetes CLI Tooling](05-k8s-cli-tooling.md)                        | Installing CLI tools required to work with a Kubernetes (minikube) cluster     |
+| [Chapter 05 - Kubernetes CLI Tooling](05-k8s-cli-tooling.md)                        | Installing CLI tools required to work with a Kubernetes (minikube) cluster     |
+| [Chapter 06 - Minikube](06-minikube.md)                                             | Configuring, installing, and starting Minikube for your Kubernetes environment |
 | [Chapter 07 - cert-manager](06-cert-manager.md)                                     | Use Helm to deploy cert-manager into your Kubernetes cluster                   |
 | [Chapter 08 - VPN and Pod Gateway](07-vpn-and-pod-gateway.md)                       | Configuring and provisioning a Pod Gateway that uses Wireguard VPN             |
 | [Chapter 09 - Secure Web Application Gateway](08-secure-web-application-gateway.md) | Configuring and provisioning a Secure Web Application Gateway (SWAG)           |

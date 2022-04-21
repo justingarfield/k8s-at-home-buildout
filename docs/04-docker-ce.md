@@ -49,7 +49,7 @@ apt-get -qq update \
 
 service docker start
 
-sudo usermode -aG docker $USER && newgrp docker
+usermod -aG docker $USER && newgrp docker
 ```
 
 ## Automatically start Docker in WSL

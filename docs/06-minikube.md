@@ -14,7 +14,7 @@ In this chapter:
 For those seeking ultimate convenience, simply run the below script:
 
 ```shell
-sudo ./scripts/bootstrap-minikube.sh
+./scripts/bootstrap-minikube.sh
 ```
 
 ## <a id="installManually"></a>Install Minikube Manually
