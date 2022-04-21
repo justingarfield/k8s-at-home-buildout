@@ -1,15 +1,20 @@
 # Overview
 
-## Tested and Supported Configurations
+In this chapter:
 
-* Ubuntu 20.04
+* [Tested and Supported Configurations](#testedConfigurations)
+* [Software and Tools](#softwareAndTools)
+
+## <a id="testedConfigurations"></a>Tested and Supported Configurations
+
 * Windows 10 Home/Professional/Enterprise + WSL + Ubuntu 20.04
-* Windows 10 Home/Professional/Enterprise + WSL + Docker Desktop + Ubuntu 20.04
-* Windows 10 Professional/Enterprise + Hyper-V + Ubuntu 20.04
+* coming soon - ~~Ubuntu 20.04~~
+* coming soon - ~~Windows 10 Home/Professional/Enterprise + WSL + Docker Desktop + Ubuntu 20.04~~
+* coming soon - ~~Windows 10 Professional/Enterprise + Hyper-V + Ubuntu 20.04~~
 
 _Note: Will most likely work on other Debian-based distributions with minimal effort._
 
-## Software and Tools
+## <a id="softwareAndTools"></a>Software and Tools
 
 The following list of Software and Tools will be installed using the provided scripts:
 

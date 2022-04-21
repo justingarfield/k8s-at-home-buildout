@@ -5,9 +5,10 @@ source "$(dirname "$0")/_root-only.sh"
 source "$(dirname "$0")/_sudouser-home.sh"
 source "$(dirname "$0")/_stack-versions.sh"
 
-# TODO: Use $MINIKUBE_VERSION here
-curl -L -o $SUDOUSER_HOME/minikube-linux-amd64 https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
-  && install $SUDOUSER_HOME/minikube-linux-amd64 /usr/local/bin/minikube
+curl -L -o ~/minikube-linux-amd64 https://storage.googleapis.com/minikube/releases/v$MINIKUBE_VERSION/minikube-linux-amd64
+
+# This step has to be called with sudo to install the binary to a shared location owned by root
+sudo install ~/minikube-linux-amd64 /usr/local/bin/minikube
 
 minikube config set driver docker \
   && minikube start \

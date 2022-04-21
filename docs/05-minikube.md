@@ -2,7 +2,14 @@
 
 There are a handful of ways to spin-up local K8s clusters these days. Including one built-in to Docker Desktop that's a checkbox away. I chose to go with `minikube` however, as that's the official K8s local cluster from Google itself, and it also works with container runtimes other than Docker (in the event someone reading this doesn't want to use Docker as the CRI).
 
-## Install Minikube via Script
+In this chapter:
+
+* [Install Minikube via Script](#installViaScript)
+* [Install Minikube Manually](#installManually)
+  * [Download and Install the minikube binary](#downloadAndInstall)
+  * [Start minikube and install required features](#startAndInstall)
+
+## <a id="installViaScript"></a>Install Minikube via Script
 
 For those seeking ultimate convenience, simply run the below script:
 
@@ -10,11 +17,11 @@ For those seeking ultimate convenience, simply run the below script:
 sudo ./scripts/bootstrap-minikube.sh
 ```
 
-## Install Minikube Manually
+## <a id="installManually"></a>Install Minikube Manually
 
 For those wanting to understand everything step-by-step, or are having problems with the bash script, here's the low-down on what's happenin'...
 
-### Download and Install the minikube binary
+### <a id="downloadAndInstall"></a>Download and Install the minikube binary
 
 First we download the minikube binary itself, and then we install it to `/usr/local/bin/minikube`. This places it in a shared location, and causes root to have ownership over it.
 
@@ -30,7 +37,7 @@ Next, we'll ensure that the default driver being used by minikube, is indeed, Do
 minikube config set driver docker
 ```
 
-### Start minikube and install required features
+### <a id="startAndInstall"></a>Start minikube and install required features
 
 Now we'll start minikube for the first time, passing it some parameters that you should only have to provide once. In this case we're going to instruct minikube's bootstrapper to:
 

@@ -343,6 +343,19 @@ You now need to do the following:
 somedude@DESKTOP-FPUE1RT:~$
 ```
 
+If you want to confirm that the WSL Kernel now supports the required WireGuard features, simply run the same script again like so:
+
+```bash
+somedude@DESKTOP-FPUE1RT:~$ sudo ~/k8s-at-home-buildout/scripts/rebuild-wsl-kernel-with-connmark.sh
+[sudo] password for somedude:
+
+Currently running WSL Kernel has CONFIG_NETFILTER_XT_CONNMARK support
+
+Currently running WSL Kernel has CONFIG_NETFILTER_XT_MATCH_CONNMARK support
+
+Currently running WSL Kernel has required feature flags for Wireguard support. No need to recompile
+```
+
 ## <a id="troubleshooting"></a>Troubleshooting
 
 ### <a id="wslRegisterDistribution"></a>WslRegisterDistribution failed with error: 0x80370102

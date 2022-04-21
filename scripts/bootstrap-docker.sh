@@ -23,3 +23,6 @@ apt-get -qq update \
   docker-ce-cli=$DOCKERCECLI_VERSION \
   containerd.io=$CONTAINERDIO_VERSION \
 && service docker start
+
+# Add the user executing this script to the docker group
+usermod -aG docker $SUDO_USER && newgrp docker

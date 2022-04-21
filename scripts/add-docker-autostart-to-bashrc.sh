@@ -17,6 +17,7 @@ BASHRC_FILE="/home/$SUDO_USER/.bashrc"
 if ! grep -q "# Automatically start docker service on login" $BASHRC_FILE; then
   echo ""
   echo "Adding automatic startup to $BASHRC_FILE"
+  echo "" >> $BASHRC_FILE
   echo "# Automatically start docker service on login" >> $BASHRC_FILE
   echo "if [[ ! -f '/var/run/docker.pid' ]]; then" >> $BASHRC_FILE
   echo "  echo 'File /var/run/docker.pid does not exist. Starting docker service...'" >> $BASHRC_FILE

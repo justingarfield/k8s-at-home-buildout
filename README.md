@@ -16,7 +16,6 @@ Most of the scripts and example code in this repository should run for users wit
 
 ## Assumptions
 
-* Your native OS is Windows 10
 * You do not currently have anything running on ports `80` or `443` on the machine you're going to run this stack on
 * You are on a machine with a CPU that supports virtualization technologies
 * You DO NOT have Docker Desktop installed
