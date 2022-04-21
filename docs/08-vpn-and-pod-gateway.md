@@ -6,31 +6,33 @@ This tutorial defaults to using Wireguard with Private Internet Access.
 
 ## Overview of the pieces to this puzzle
 
-
-
 ## Create K8s Namespaces
 
 Pod Gateway related resources will require two namespaces to function properly in this stack.
 
-* `vpn` Namespace - Contains pods that will be routed through the Pod Gateway for ALL egress traffic
+* `jollyroger` Namespace - Contains pods that will be routed through the Pod Gateway for ALL egress traffic
 * `pod-gateway` Namespace - Contains resources that will be running the actual Pod Gateway
 
-```shell
-kubectl apply -f vpn-namespace/namespace.yml
-kubectl apply -f pod-gateway/namespace.yml
+```bash
+kubectl apply \
+  -f ~/k8s-at-home-buildout/vpn-namespace/namespace.yml \
+  -f ~/k8s-at-home-buildout/pod-gateway/namespace.yml
 ```
 
 ## Acquire PIA Wireguard Details
 
 Now that it's fully supported by Private Internet Access, this stack uses Wireguard. Wireguard is newer, smaller, faster, and doesn't carry all of the baggage that comes with OpenVPN connections. Setting up a Wireguard connection is a bit different than a simple username/password combo however. We'll use not only our username/password, but also a locally generated public / private keypair to perform a secure key exchange with the Wireguard server(s).
 
-```shell
+```bash
 git clone https://github.com/pia-foss/manual-connections
-cd manual-connections && sudo PIA_USER=<your PIA username> PIA_PASS=<your PIA password> bash get_region.sh && cd ..
+cd manual-connections \
+  && sudo PIA_USER=<your PIA username> PIA_PASS=<your PIA password> ./get_region.sh \
+  && cd ..
 ```
 
 You should see output similar to this:
-```
+
+```bash
 Meta Services 149.57.16.33      -     baltimore402
 WireGuard     149.57.16.54      -     baltimore402
 OpenVPN TCP   149.57.16.58      -     baltimore402
@@ -53,18 +55,18 @@ The Wireguard container can be given the name of a Secret (located in the same N
 
 Running the following script will take your PIA details from the prior step, generate a public/private key-pair, call a PIA HTTPS endpoint to get the required access credentials for VPN connectivity, generate a `wg0.conf` file for Wireguard on-the-fly, and store that `wg0.conf` file as the value of a Kubernetes Secret.
 
-```shell
+```bash
   WG_HOSTNAME=<your PIA Wireguard server hostname> \
   WG_SERVER_IP=<your PIA Wireguard server IP address> \
   PIA_TOKEN=<your PIA_TOKEN> \
-  sudo ./scripts/create-pod-gateway-secret.sh
+  ~/k8s-at-home-buildout/scripts/create-pod-gateway-secret.sh
 ```
 
 ## Find your Cluster and Service CIDRs
 
 Next up is finding out what your Cluster and Service CIDRs are. These are IP Address ranges/blocks that are used for IP assignments for Services and Pods inside of your K8s Cluster.
 
-```
+```bash
 kubectl cluster-info dump | grep -m 1 cluster-cidr
 kubectl cluster-info dump | grep -m 1 service-cluster-ip-range
 ```
@@ -77,8 +79,8 @@ Now that we have all of our PIA Wireguard prep out of the way, it's time to depl
 
 We do this simply with Helm:
 
-```shell
-helm install pod-gateway k8s-at-home/pod-gateway -n pod-gateway -f pod-gateway/values.yaml \
+```bash
+helm install pod-gateway k8s-at-home/pod-gateway -n pod-gateway -f ~/k8s-at-home-buildout/pod-gateway/values.yml \
   --set settings.NOT_ROUTED_TO_GATEWAY_CIDRS="<your Cluster and Service CIDRs, separated by a space>" \
   --set settings.VPN_LOCAL_CIDRS="<your Local Network CIDRs, separated by a space>"
 ```
@@ -92,11 +94,3 @@ Make sure you opened up Outbound `443/TCP`, `1337/TCP`, and `1337/UDP`
 ### Webhook doesn't seem to be triggering
 
 Make sure you've created your `vpn` namespace with the `routed-gateway: "true"` label. It's easy to quickly crate the namespace using `kubectl create ns` and completely forget about the label in the process. Without that label, the webhook will never pickup any triggers.
-
-## References
-
-* [gateway-admision-controller container image](https://github.com/k8s-at-home/gateway-admision-controller)
-* [wireguard container image](https://github.com/k8s-at-home/container-images/tree/main/apps/wireguard)
-* [pod-gateway container image](https://github.com/k8s-at-home/pod-gateway)
-* [pod-gateway chart](https://github.com/k8s-at-home/charts/blob/master/charts/stable/pod-gateway)
-* [wireguard chart](https://github.com/k8s-at-home/charts/tree/master/charts/stable/wireguard)

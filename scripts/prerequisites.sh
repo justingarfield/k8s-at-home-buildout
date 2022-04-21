@@ -18,9 +18,9 @@
 # Setup tooling we'll use w/ this stack
 apt-get install -y \
   curl \
-  jq \
+  jq \ # needed by PIA scripts
   git \
   apt-transport-https \
   golang-go \
-  wireguard-tools \
+  wireguard-tools \ # needed by PIA scripts
   conntrack

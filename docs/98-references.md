@@ -8,3 +8,10 @@
 * [How to include bash scripts with relative path? [duplicate]](https://stackoverflow.com/questions/48167083/how-to-include-bash-scripts-with-relative-path)
 * [Bash Source Command](https://linuxize.com/post/bash-source-command/)
 * [How to catch timeout/errors in a CURL shell script?](https://stackoverflow.com/questions/18258804/how-to-catch-timeout-errors-in-a-curl-shell-script)
+
+* [gateway-admision-controller container image](https://github.com/k8s-at-home/gateway-admision-controller)
+* [wireguard container image](https://github.com/k8s-at-home/container-images/tree/main/apps/wireguard)
+* [pod-gateway container image](https://github.com/k8s-at-home/pod-gateway)
+* [pod-gateway chart](https://github.com/k8s-at-home/charts/blob/master/charts/stable/pod-gateway)
+* [wireguard chart](https://github.com/k8s-at-home/charts/tree/master/charts/stable/wireguard)
+* [Using PIA DNS in Custom Configurations](https://www.privateinternetaccess.com/helpdesk/kb/articles/using-pia-dns-in-custom-configurations)

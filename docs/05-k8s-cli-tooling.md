@@ -31,3 +31,14 @@ Most of this stack will be built using Helm Charts (and a few container images) 
 helm repo add k8s-at-home https://k8s-at-home.com/charts/
 helm repo update
 ```
+
+## kubectl Bash Autocompletion
+
+See: https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#enable-shell-autocompletion
+
+```bash
+sudo apt-get install -y bash-completion
+type _init_completion
+source /usr/share/bash-completion/bash_completion
+echo 'source <(kubectl completion bash)' >>~/.bashrc
+```

@@ -5,7 +5,7 @@
 ###
 
 source "$(dirname "$0")/_bash-colors.sh"
-source "$(dirname "$0")/_root-only.sh"
+source "$(dirname "$0")/_check-tool.sh"
 
 # Now we call the function to make sure we can use curl, jq and kubectl.
 check_tool curl
