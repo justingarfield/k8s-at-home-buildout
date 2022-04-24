@@ -5,7 +5,12 @@ Jackett acts as a Cache / RSS Feed / Search Engine between PVR software and any 
 ## High-level overview
 
 ![Diagram: Jackett High-level Overview](../assets/Jackett-Overview.png "Diagram: Jackett High-level Overview")
+
 ---
+
+## Expected Disk Usage
+
+Jackett uses very minimal disk space, as it's more of a utility / cache than full-blown application like Sonarr, Radarr, etc. The templates included in this repository default to providing Jackett with **128MiB** of space. This should be more than enough, considering defualt OOTB with 60 Indexers configured, uses around 350Kib.
 
 ## Deploy and Configure Jackett via Script
 

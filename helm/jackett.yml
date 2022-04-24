@@ -17,4 +17,4 @@ persistence:
     enabled: true
     type: pvc
     accessMode: ReadWriteOnce
-    size: 1Gi
+    size: 128Mi
