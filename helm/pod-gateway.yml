@@ -21,6 +21,7 @@ addons:
             # Allow traffic within K8S - change if your K8S cluster uses a different CIDR
           - ipBlock:
               cidr: 10.244.0.0/16
+              
 settings:
   VPN_INTERFACE: wg0
   VPN_BLOCK_OTHER_TRAFFIC: true

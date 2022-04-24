@@ -1,0 +1,20 @@
+ingress:
+  main:
+    enabled: true
+    annotations:
+      cert-manager.io/issuer: my-ca-issuer
+    ingressClassName: nginx
+    hosts:
+      - host: localhost
+        paths:
+          - path: /readarr
+    tls:
+      - secretName: readarr
+        hosts:
+          - localhost
+persistence:
+  config:
+    enabled: true
+    type: pvc
+    accessMode: ReadWriteOnce
+    size: 1Gi

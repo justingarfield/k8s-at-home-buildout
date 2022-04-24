@@ -15,3 +15,9 @@
 * [pod-gateway chart](https://github.com/k8s-at-home/charts/blob/master/charts/stable/pod-gateway)
 * [wireguard chart](https://github.com/k8s-at-home/charts/tree/master/charts/stable/wireguard)
 * [Using PIA DNS in Custom Configurations](https://www.privateinternetaccess.com/helpdesk/kb/articles/using-pia-dns-in-custom-configurations)
+
+* https://www.youtube.com/watch?v=MpbIZ1SmEkU
+* https://octetz.com/docs/2020/2020-10-01-calico-routing-modes/
+* https://itgaertner.net/posts/wireguard-in-wsl/
+* https://github.com/microsoft/WSL/issues/7407?msclkid=07719f46bb5411ecb40638ca5fd0bb59
+* https://docs.microsoft.com/en-us/windows/wsl/vhd-size

@@ -18,6 +18,12 @@ sudo ./scripts/bootstrap-lidarr.sh
 
 For those wanting to understand everything step-by-step, or are having problems with the bash script, here's the low-down on what's happenin'...
 
-```shell
-helm install lidarr k8s-at-home/lidarr -n jollyroger
+```bash
+helm install lidarr k8s-at-home/lidarr -n jollyroger -f helm/lidarr.yml
+
+---
+
+LIDARR_POD_NAME=$(kubectl -n jollyroger get pods | grep lidarr | awk '{print $1}') \
+&& kubectl -n jollyroger exec $LIDARR_POD_NAME -- sed -i 's/<UrlBase><\/UrlBase>/<UrlBase>\/lidarr<\/UrlBase>/g' /config/config.xml \
+&& kubectl -n jollyroger rollout restart deployment/lidarr
 ```

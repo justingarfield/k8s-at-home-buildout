@@ -2,6 +2,9 @@
 
 Jackett acts as a Cache / RSS Feed / Search Engine between PVR software and any configured Torrent Trackers / Torznab Indexers.
 
+## High-level overview
+
+![Diagram: Jackett High-level Overview](../assets/Jackett-Overview.png "Diagram: Jackett High-level Overview")
 ---
 
 ## Deploy and Configure Jackett via Script
@@ -17,7 +20,13 @@ sudo ./scripts/bootstrap-jackett.sh
 For those wanting to understand everything step-by-step, or are having problems with the bash script, here's the low-down on what's happenin'...
 
 ```shell
-helm install jackett k8s-at-home/jackett -n jollyroger
+helm install jackett k8s-at-home/jackett -n jollyroger -f helm/jackett.yml
+
+---
+
+JACKETT_POD_NAME=$(kubectl -n jollyroger get pods | grep jackett | awk '{print $1}') \
+&& kubectl -n jollyroger exec $JACKETT_POD_NAME -- sed -i 's/\"BasePathOverride\": null/\"BasePathOverride\": \"\/jackett\"/g' /config/Jackett/ServerConfig.json \
+&& kubectl -n jollyroger rollout restart deployment/jackett
 ```
 
 ---
@@ -111,3 +120,13 @@ If private browsing didn't fix your login issue, then another option on the tabl
 ### Why Jackett and not Prowlarr?
 
 Prowlarr is still being very actively developed, and at the time of this writing has many major issues that Jackett does not. In favor of "something that's stable", I still use Jackett in my stack. I will most likely switch to Prowlarr down the road, but I'm still not satisfied with it yet.
+
+### How do I cycle my API Key?
+
+If you feel like your API Key may have been compromised, or you just want to rotate it as part of best practices, this is a quick and simple way...
+
+```bash
+JACKETT_POD_NAME=$(kubectl -n sandbox get pods | grep jackett | awk '{print $1}') \
+&& kubectl -n sandbox exec $JACKETT_POD_NAME -- sed -i '/APIKey/c\  \"APIKey\": null,' /config/Jackett/ServerConfig.json \
+&& kubectl -n sandbox rollout restart deployment/jackett
+```

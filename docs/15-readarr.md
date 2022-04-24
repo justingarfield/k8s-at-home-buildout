@@ -19,5 +19,11 @@ sudo ./scripts/bootstrap-readarr.sh
 For those wanting to understand everything step-by-step, or are having problems with the bash script, here's the low-down on what's happenin'...
 
 ```shell
-helm install readarr k8s-at-home/readarr -n jollyroger
+helm install readarr k8s-at-home/readarr -n jollyroger -f helm/readarr.yml
+
+---
+
+READARR_POD_NAME=$(kubectl -n jollyroger get pods | grep readarr | awk '{print $1}') \
+&& kubectl -n jollyroger exec $READARR_POD_NAME -- sed -i 's/<UrlBase><\/UrlBase>/<UrlBase>\/readarr<\/UrlBase>/g' /config/config.xml \
+&& kubectl -n jollyroger rollout restart deployment/readarr
 ```
